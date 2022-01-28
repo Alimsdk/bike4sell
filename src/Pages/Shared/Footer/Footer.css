@@ -1,0 +1,13 @@
+footer{
+    background-color: rgb(26, 24, 24);
+    color: white;
+    
+}
+
+footer a{
+    color: white;
+}
+
+footer a:hover{
+    color: whitesmoke;
+}

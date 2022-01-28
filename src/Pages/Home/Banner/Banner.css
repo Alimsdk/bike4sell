@@ -1,0 +1,37 @@
+#banner{
+    background-image: url('../../../images/banner.jpg');
+    background-color: rgb(170, 255, 161);
+    background-blend-mode: overlay;
+    height: 600px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#banner-info{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+   
+}
+
+#banner-info h2{
+    font-size: 55px;
+}
+
+#banner-info h2,#banner-info h3{
+    letter-spacing: 3;
+   line-height: 1.5;
+}
+
+#banner-info span{
+    color: red;
+}
+
+#banner-info button{
+    background-color: rgb(255, 94, 0);
+    color:white;
+    margin-top: 20px;
+}

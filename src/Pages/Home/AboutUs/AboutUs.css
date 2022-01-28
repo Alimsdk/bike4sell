@@ -1,0 +1,18 @@
+#about-us{
+    background-color: rgb(104 255 255 / 82%);
+    height: 400px;
+    margin-top: 50px;
+}
+
+#about-us h6{
+    background-color: rgb(243, 144, 160);
+    color: white;
+    display: inline-block;
+    padding: 3px 15px;
+}
+
+#about-bike{
+    max-width:400px;
+    margin-top: 50px;
+    border-radius: 20px;
+}
