@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import Header from '../../Shared/Header/Header';
 import {useNavigate} from 'react-router-dom'
+import usePurchaseInfo from '../../../Hooks/usePurchaseInfo';
 const PurchaseInfo = () => {
     const [purchaseInfo,setPurchaseInfo]=useState(null);
     const navigate=useNavigate();
+    const {selectedProduct}=usePurchaseInfo();
     const handlePurchaseValue=e=>{
       const name=e.target.name;
       const value=e.target.value;
@@ -15,7 +17,7 @@ const PurchaseInfo = () => {
     const handlePurchaseInfo=(e)=>{
     
       console.log(purchaseInfo);
-      fetch('http://localhost:5000/orders',{
+      fetch('https://frozen-river-22304.herokuapp.com/orders',{
         method:'POST',
         headers:{
           'content-type':'application/json'
@@ -27,11 +29,13 @@ const PurchaseInfo = () => {
       alert('Order Successfull');
       navigate('/');
     }
+
+    console.log(selectedProduct)
     return (
         <div>
             <Header/>
               <form onSubmit={handlePurchaseInfo} style={{marginTop:'200px'}}>
-               <input type="text" name="bookedProduct" onBlur={handlePurchaseValue}  placeholder='Booked Product' />
+               <input type="text" name="bookedProduct" onBlur={handlePurchaseValue} defaultValue={selectedProduct}  placeholder='Booked Product' />
                <input type="text" name="userName" onBlur={handlePurchaseValue}  placeholder='Your Name' />
                <input type="email" name='userEmail' onBlur={handlePurchaseValue} placeholder='Your Email' />
                <input type="text" name='userAddress'  onBlur={handlePurchaseValue}  placeholder='Your Address' />

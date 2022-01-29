@@ -7,7 +7,7 @@ const Explore = () => {
     const [bikesInfo,setBikesInfo]=useState(null);
 
     useEffect(()=>{
-        fetch('http://localhost:5000/bikes')
+        fetch('https://frozen-river-22304.herokuapp.com/bikes')
         .then(res=>res.json())
         .then(data=>setBikesInfo(data));
     },[])
@@ -19,7 +19,7 @@ const Explore = () => {
           <h2 className='my-5 text-white'>CheckOut Our All Bikes</h2>
             <div className="row gx-5">
             {
-                bikesInfo?.map(bike=><SingleBikes key={bike.id} bike={bike}/>)
+                bikesInfo?.map(bike=><SingleBikes key={bike._id} bike={bike}/>)
             }
             </div>
           </div>

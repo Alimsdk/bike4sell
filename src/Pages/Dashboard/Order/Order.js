@@ -7,7 +7,7 @@ const Order = ({order}) => {
 
     const cancelOrder=()=>{
       if(window.confirm('are you sure you want to delete?')){
-          fetch(`http://localhost:5000/orders/${_id}`,{
+          fetch(`https://frozen-river-22304.herokuapp.com/orders/${_id}`,{
               method:'DELETE'
           }).then(res=>res.json())
           .then(data=>console.log(data))

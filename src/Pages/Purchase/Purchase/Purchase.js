@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
+import usePurchaseInfo from '../../../Hooks/usePurchaseInfo';
 
 const Purchase = () => {
     const {id}=useParams();
     const [choosedBike,setChoosedBike]=useState(null);
+    const {setSelectedProduct}=usePurchaseInfo();
+
     const navigate=useNavigate();
     const handleBuyNow=()=>{
         if(window.confirm('are you sure you want to buy?')){
@@ -13,9 +16,13 @@ const Purchase = () => {
         
     }
     useEffect(()=>{
-        fetch(`http://localhost:5000/bikes/${id}`)
+        fetch(`https://frozen-river-22304.herokuapp.com/bikes/${id}`)
         .then(res=>res.json())
-        .then(data=>setChoosedBike(data));
+        .then(data=>{
+          setChoosedBike(data)
+        
+          setSelectedProduct(data?.model)
+        });
     },[])
     return (   
 
@@ -29,6 +36,7 @@ const Purchase = () => {
     <ListGroupItem>Bike Type : {choosedBike?.type}</ListGroupItem>
     <ListGroupItem>Gears : {choosedBike?.gears}</ListGroupItem>
     <ListGroupItem>Price : {choosedBike?.price} Taka</ListGroupItem>
+    
   </ListGroup>
   <Card.Body>
     <Card.Link style={{cursor:'pointer'}} onClick={()=>navigate('/')}>Back to Home</Card.Link>

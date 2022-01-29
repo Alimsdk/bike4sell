@@ -28,7 +28,7 @@ const Login = () => {
            <form onSubmit={handleLoginSubmit}>
                <input onBlur={handleUserLoginInfo} name="email" type="email" placeholder='Your Email' />
                <input onBlur={handleUserLoginInfo} name="password" type="password" placeholder='Your Password'/>
-                <input type="submit" value="Register" />
+                <input type="submit" value="Login" />
            </form>
            <button className='d-block mx-auto' onClick={signInUsingGoogle}><FontAwesomeIcon icon={faGoogle}  /> Google</button>
            <Footer/>

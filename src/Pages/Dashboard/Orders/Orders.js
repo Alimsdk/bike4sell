@@ -7,7 +7,7 @@ const Orders = () => {
     const [myOrders,setMyOrders]=useState(null);
     const {user}=useAuth();
     useEffect(()=>{
-        fetch(`http://localhost:5000/orders/${user.email}`)
+        fetch(`https://frozen-river-22304.herokuapp.com/orders/${user.email}`)
         .then(res=>res.json())
         .then(data=>setMyOrders(data));
     },[user.email,myOrders])
