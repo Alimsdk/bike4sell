@@ -10,6 +10,7 @@ import Explore from "./Pages/Explore/Explore/Explore";
 import Home from "./Pages/Home/Home/Home";
 import Login from "./Pages/Login/Login/Login";
 import Register from "./Pages/Login/Register/Register";
+import AdminRoute from "./Pages/PrivateRoute/AdminRoute";
 import PrivateRoute from "./Pages/PrivateRoute/PrivateRoute";
 import Purchase from "./Pages/Purchase/Purchase/Purchase";
 import PurchaseInfo from "./Pages/Purchase/PurchaseInfo/PurchaseInfo";
@@ -37,8 +38,8 @@ function App() {
         <Route path='orders' element={<PrivateRoute><Orders/></PrivateRoute>}/>
         <Route path='payments' element={<PrivateRoute><Payments/></PrivateRoute>}/>
         <Route path='reviews' element={<PrivateRoute><Reviews/></PrivateRoute>}/>
-        <Route path='makeadmin' element={<PrivateRoute><MakeAdmin/></PrivateRoute>}/>
-        <Route path='manage-orders' element={<PrivateRoute><ManageOrders/></PrivateRoute>}/>
+        <Route path='makeadmin' element={<AdminRoute><MakeAdmin/></AdminRoute>}/>
+        <Route path='manage-orders' element={<AdminRoute><ManageOrders/></AdminRoute>}/>
 
       </Route>
       

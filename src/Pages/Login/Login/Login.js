@@ -4,9 +4,17 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Header from '../../Shared/Header/Header';
 import Footer from '../../Shared/Footer/Footer';
 import useAuth from '../../../Hooks/useAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 const Login = () => {
     const [loginInfo,setLoginInfo]=useState(null);
    const {logInUser,signInUsingGoogle}=useAuth();
+   const location=useLocation();
+   const navigate=useNavigate();
+
+   const signInWithGoogle=()=>{
+     signInUsingGoogle(location,navigate);
+   }
+
     const handleUserLoginInfo=(e)=>{
       const fieldName=e.target.name;
       const value=e.target.value;
@@ -16,7 +24,7 @@ const Login = () => {
     }
   
     const handleLoginSubmit=e=>{
-      logInUser(loginInfo.email,loginInfo.password)
+      logInUser(loginInfo.email,loginInfo.password,location,navigate)
       e.preventDefault();
     }
 
@@ -30,7 +38,7 @@ const Login = () => {
                <input onBlur={handleUserLoginInfo} name="password" type="password" placeholder='Your Password'/>
                 <input type="submit" value="Login" />
            </form>
-           <button className='d-block mx-auto' onClick={signInUsingGoogle}><FontAwesomeIcon icon={faGoogle}  /> Google</button>
+           <button className='d-block mx-auto' onClick={signInWithGoogle}><FontAwesomeIcon icon={faGoogle}  /> Google</button>
            <Footer/>
         </div>
      

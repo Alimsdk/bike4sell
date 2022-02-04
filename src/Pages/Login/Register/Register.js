@@ -6,10 +6,13 @@ import './Register.css'
 import Header from '../../Shared/Header/Header';
 import Footer from '../../Shared/Footer/Footer';
 import useAuth from '../../../Hooks/useAuth';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Register = () => {
      const [userInfo,setUserInfo]=useState({});
    const {registerNewUser,signInUsingGoogle}=useAuth();
+   const location=useLocation();
+   const navigate=useNavigate();
   
     const handleUserInfo=e=>{
         const fieldName=e.target.name;
@@ -26,7 +29,7 @@ const Register = () => {
             alert("password didn't match!")
             return;
         }
-            registerNewUser(userInfo.userName,userInfo.userEmail,userInfo.userPassword)
+            registerNewUser(userInfo.userName,userInfo.userEmail,userInfo.userPassword,location,navigate)
         
        
         e.preventDefault();

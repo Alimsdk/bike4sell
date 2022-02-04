@@ -7,22 +7,29 @@ initializeAuthentication();
 const useFirebase = () => {
     const [user,setUser]=useState(null);
     const [admin,setAdmin]=useState(false);
+    const [model,setModel]=useState('');
+    const [isLoading,setIsLoading]=useState(true);
     const auth= getAuth();
     const googleProvider=new GoogleAuthProvider();
 
-    const signInUsingGoogle=()=>{
+    const signInUsingGoogle=(location,navigate)=>{
+        setIsLoading(true);
         signInWithPopup(auth,googleProvider)
         .then(result=>{
             const user=result.user;
             console.log(user);
+           
             setUser(user);
             saveUserToDb(user,'PUT');
+            const destination = location?.state?.from || '/';
+            navigate(destination);
         }).catch(error=>{
             console.log(error.message);
-        })
+        }).finally(()=> setIsLoading(false))
     }
 
-    const registerNewUser=(name,email,password)=>{
+    const registerNewUser=(name,email,password,location,navigate)=>{
+        setIsLoading(true)
         createUserWithEmailAndPassword(auth,email,password)
         .then(result=>{
          const newUser={email,password,displayName:name}
@@ -31,10 +38,12 @@ const useFirebase = () => {
          updateProfile(auth.currentUser,{
              displayName:name
          })
+         const destination=location?.state?.from || '/'
+         navigate(destination);
         }).catch(error=>{
             console.log(error.message);
             alert(error.message)
-        })
+        }).finally(()=>setIsLoading(false));
     }
 
     const saveUserToDb=(user,method)=>{
@@ -50,23 +59,29 @@ const useFirebase = () => {
        })
     }
 
-    const logInUser=(email,password)=>{
+    const logInUser=(email,password,location,navigate)=>{
+        setIsLoading(true);
         signInWithEmailAndPassword(auth,email,password)
         .then(result=>{
             const user=result.user;
+            const destination = location?.state?.from || '/';
+            console.log(destination);
+                navigate(destination);
            console.log(user);
         }).catch(error=>{
             console.log(error.message);
-        })
+        }).finally(()=>setIsLoading(false))
     }
 
     useEffect(()=>{
+        setIsLoading(true);
        const unsubscribed= onAuthStateChanged(auth,user=>{
             if(user){
                 setUser(user)
             }else{
                 setUser(null)
             }
+            setIsLoading(false);
         })
         return ()=> unsubscribed;
     },[])
@@ -78,20 +93,24 @@ const useFirebase = () => {
     },[user?.email])
 
     const logOut=()=>{
+        setIsLoading(true);
         signOut(auth).then(()=>{
             setUser(null)
         }).catch(error=>{
             console.log(error.message);
-        })
+        }).finally(()=>setIsLoading(false))
     }
-
+ console.log('use',user);
     return { 
         user,
         signInUsingGoogle,
         registerNewUser,
         logOut,
         logInUser,
-        admin
+        admin,
+        model,
+        setModel,
+        isLoading
     }
     
 };

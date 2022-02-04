@@ -8,7 +8,7 @@ const Bike = ({bike}) => {
         navigate(`/purchase/${id}`)
     }
     return (
-        <div className='col-4 mb-5' >
+        <div className='col-12 col-md-4 mb-5' >
              <div id="card">
              <img id="bike-card-img" src={img} alt="" />
              <h4>{model}</h4>

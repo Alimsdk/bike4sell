@@ -32,7 +32,7 @@ const Header = () => {
             <div>
               <span className='text-white'>Hello, {user?.displayName?.split(' ')[0]}</span>
             <Button variant="link" onClick={()=>navigate('/dashboard/orders')} style={{color:'white'}}>Dashboard</Button>
-              <button onClick={logOut}>LogOut</button>
+              <button onClick={logOut} className='rounded'>LogOut</button>
             </div>
        
           }

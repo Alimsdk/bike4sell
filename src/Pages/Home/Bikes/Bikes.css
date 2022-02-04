@@ -1,3 +1,7 @@
 #bikes{
     background-color: rgb(202, 231, 255);
 }
+
+@media (max-width:769px) {
+  #bikes{  margin-top: 280px;}
+}

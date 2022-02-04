@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Card, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import usePurchaseInfo from '../../../Hooks/usePurchaseInfo';
+import useAuth from '../../../Hooks/useAuth';
 
 const Purchase = () => {
     const {id}=useParams();
     const [choosedBike,setChoosedBike]=useState(null);
-    const {setSelectedProduct}=usePurchaseInfo();
-
+   const {setModel}=useAuth()
+  
     const navigate=useNavigate();
     const handleBuyNow=()=>{
         if(window.confirm('are you sure you want to buy?')){
@@ -20,8 +20,8 @@ const Purchase = () => {
         .then(res=>res.json())
         .then(data=>{
           setChoosedBike(data)
-        
-          setSelectedProduct(data?.model)
+        setModel(data.model);
+         
         });
     },[])
     return (   
